@@ -1,0 +1,67 @@
+*.podspec
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/Project.xml
+/.idea/misc.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/app/fabric.properties
+iosApp/Pods/
+
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+classes/
+gen-external-apklibs/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+project.properties
+release.properties
+
+# Eclipse project files
+.classpath
+.project
+.metadata
+.settings
+
+# Intellij
+.idea/
+*.iml
+
+# Maven
+log/
+target/
+pom.xml.*
+
+# Mac
+*/test-output
+temp-testng-customsuite.xml
+
+# Crashlytics
+crashlytics-build.properties
+com_crashlytics_export_strings.xml
+app/keystore/keystore.config
+logs
+screenshot
+app/.externalNativeBuild
+gradleBuild
