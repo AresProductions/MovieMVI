@@ -18,10 +18,25 @@ class MovieListViewModel: ObservableObject {
 
     @Published var viewState: MovieListViewState = .loading
 
+    enum Navigation: Hashable {
+        case movieSelected(Int)
+    }
+
     func onAction(_ action: MovieListAction) {
         switch action {
         case .refresh:
             getMovies()
+        case .movieSelected(let id):
+            selectMovie(id: id)
+        }
+    }
+
+    private func selectMovie(id: Int) {
+        switch viewState {
+        case .content(let list, _):
+            viewState = .content(list: list, navigation: .movieSelected(id))
+        default:
+            fatalError()
         }
     }
 
@@ -36,7 +51,7 @@ class MovieListViewModel: ObservableObject {
                     self?.viewState = .error
                 }
             }, receiveValue: { [weak self] movies in
-                self?.viewState = .content(list: movies)
+                self?.viewState = .content(list: movies, navigation: nil)
             }).store(in: &cancelables)
     }
 }

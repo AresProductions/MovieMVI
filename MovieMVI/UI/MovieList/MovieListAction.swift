@@ -9,4 +9,5 @@ import Foundation
 
 enum MovieListAction {
     case refresh
+    case movieSelected(Int)
 }

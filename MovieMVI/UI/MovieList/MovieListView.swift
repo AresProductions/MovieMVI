@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MovieListView: View {
     @StateObject var viewModel: MovieListViewModel
+    @State private var navigation: MovieListViewModel.Navigation?
 
     var body: some View {
         NavigationView {
@@ -16,11 +17,16 @@ struct MovieListView: View {
                 switch viewModel.viewState {
                 case .loading: renderLoading()
                 case .error: renderError()
-                case .content(let movies): renderContent(movies: movies)
+                case .content(let movies, let navigation):
+                    renderContent(movies: movies)
+                    navigationLinks(navigation: navigation)
+                        .onAppear {
+                            self.navigation = navigation
+                        }
                 }
-            }.onAppear(perform: {
+            }.onAppear {
                 viewModel.onAction(.refresh)
-            })
+            }
         }
     }
 
@@ -38,13 +44,26 @@ struct MovieListView: View {
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(movies) { movie in
-                    NavigationLink(destination: MovieDetailView(viewModel: MovieDetailViewModel(movieId: movie.id))) {
-                        MovieItemView(movie: movie)
-                    }.isDetailLink(false)
+                    MovieItemView(movie: movie).onTapGesture {
+                        viewModel.onAction(.movieSelected(movie.id))
+                    }
                 }
                 Spacer()
             }
         }.padding()
+    }
+
+    @ViewBuilder
+    private func navigationLinks(navigation: MovieListViewModel.Navigation?) -> some View {
+        switch navigation {
+        case .movieSelected(let movieId):
+            NavigationLink(destination: MovieDetailView(viewModel: MovieDetailViewModel(movieId: movieId)),
+                           tag: MovieListViewModel.Navigation.movieSelected(movieId),
+                           selection: $navigation,
+                           label: { EmptyView() })
+
+        default: EmptyView()
+        }
     }
 }
 

@@ -21,7 +21,7 @@ class MovieDetailViewModel: ObservableObject {
 
     @Published var viewState: MovieDetailViewState = .loading
 
-    func onAction(_ action: MovieListAction) {
+    func onAction(_ action: MovieDetailAction) {
         switch action {
         case .refresh:
             getMovies()

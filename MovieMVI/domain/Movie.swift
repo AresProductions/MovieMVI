@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Identifiable { // I would make this a ViewState model
+struct Movie: Identifiable {
     let id: Int
     let name: String
     let year: Int
