@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MovieListView: View {
     @StateObject var viewModel: MovieListViewModel
-    @State private var navigation: MovieListViewModel.Navigation?
 
     var body: some View {
         NavigationView {
@@ -17,16 +16,12 @@ struct MovieListView: View {
                 switch viewModel.viewState {
                 case .loading: renderLoading()
                 case .error: renderError()
-                case .content(let movies, let navigation):
+                case .content(let movies):
                     renderContent(movies: movies)
-                    navigationLinks(navigation: navigation)
-                        .onAppear {
-                            self.navigation = navigation
-                        }
                 }
             }.onAppear {
                 viewModel.onAction(.refresh)
-            }
+            }.navigationTitle(Text("Movie List"))
         }
     }
 
@@ -44,26 +39,20 @@ struct MovieListView: View {
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(movies) { movie in
-                    MovieItemView(movie: movie).onTapGesture {
-                        viewModel.onAction(.movieSelected(movie.id))
-                    }
+                    MovieItemView(movie: movie)
+                        .onTapGesture {
+                            viewModel.onAction(.movieSelected(movie.id))
+                        }.padding(.bottom)
+
+                    NavigationLink(destination: MovieDetailView(viewModel: MovieDetailViewModel(movieId: movie.id)),
+                                   tag: MovieListViewModel.Navigation.movieDetails(movieId: movie.id),
+                                   selection: $viewModel.navigation,
+                                   label: { EmptyView() })
+                        .isDetailLink(false)
                 }
                 Spacer()
             }
         }.padding()
-    }
-
-    @ViewBuilder
-    private func navigationLinks(navigation: MovieListViewModel.Navigation?) -> some View {
-        switch navigation {
-        case .movieSelected(let movieId):
-            NavigationLink(destination: MovieDetailView(viewModel: MovieDetailViewModel(movieId: movieId)),
-                           tag: MovieListViewModel.Navigation.movieSelected(movieId),
-                           selection: $navigation,
-                           label: { EmptyView() })
-
-        default: EmptyView()
-        }
     }
 }
 

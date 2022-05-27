@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MovieListAction {
+enum MovieListAction: Action {
     case refresh
     case movieSelected(Int)
 }

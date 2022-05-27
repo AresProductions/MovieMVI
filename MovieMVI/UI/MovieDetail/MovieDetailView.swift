@@ -22,8 +22,7 @@ struct MovieDetailView: View {
             }
         }.onAppear(perform: {
             viewModel.onAction(.refresh)
-        })
-
+        }).navigationTitle(Text("Movie Detail"))
     }
 
     private func renderLoading() -> some View {
@@ -40,6 +39,7 @@ struct MovieDetailView: View {
         VStack {
             Text("Movie Title: \(movie.name)")
             Text("Year: \(movie.year)")
+            FavoriteView(viewModel: FavoriteViewModel(movieId: movie.id))
         }.padding()
     }
 }

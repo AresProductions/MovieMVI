@@ -8,7 +8,7 @@
 import Foundation
 
 enum MovieListViewState: ViewState {
-    case content(list: [Movie], navigation: MovieListViewModel.Navigation?)
+    case content(list: [Movie])
     case loading
     case error
 }

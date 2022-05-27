@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum MovieDetailAction {
+enum MovieDetailAction: Action {
     case refresh
 }

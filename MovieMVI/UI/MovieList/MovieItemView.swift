@@ -11,7 +11,8 @@ struct MovieItemView: View {
     let movie: Movie
 
     var body: some View {
-        VStack {
+        HStack {
+            FavoriteView(viewModel: FavoriteViewModel(movieId: movie.id))
             Text(movie.name)
             Text(String(movie.year))
         }

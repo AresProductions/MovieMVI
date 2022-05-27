@@ -15,8 +15,13 @@ class MovieDetailViewModel: ObservableObject {
     private let movieId: Int
 
     init(movieId: Int) {
+        print("MovieDetailsVM inited")
         self.getMovieDetailInteractor = GetMovieDetailDefaultInteractor()
         self.movieId = movieId
+    }
+    
+    deinit {
+        print("MovieDetailsVM denited")
     }
 
     @Published var viewState: MovieDetailViewState = .loading

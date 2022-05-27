@@ -13,13 +13,19 @@ class MovieListViewModel: ObservableObject {
     private let getMoviesInteractor: GetMoviesInteractor
 
     init() {
+        print("MovieListVM inited")
         self.getMoviesInteractor = GetMoviesDefaultInteractor()
+    }
+    
+    deinit {
+        print("MovieListVM denited")
     }
 
     @Published var viewState: MovieListViewState = .loading
+    @Published var navigation: Navigation?
 
     enum Navigation: Hashable {
-        case movieSelected(Int)
+        case movieDetails(movieId: Int)
     }
 
     func onAction(_ action: MovieListAction) {
@@ -27,16 +33,7 @@ class MovieListViewModel: ObservableObject {
         case .refresh:
             getMovies()
         case .movieSelected(let id):
-            selectMovie(id: id)
-        }
-    }
-
-    private func selectMovie(id: Int) {
-        switch viewState {
-        case .content(let list, _):
-            viewState = .content(list: list, navigation: .movieSelected(id))
-        default:
-            fatalError()
+            navigation = .movieDetails(movieId: id)
         }
     }
 
@@ -51,7 +48,7 @@ class MovieListViewModel: ObservableObject {
                     self?.viewState = .error
                 }
             }, receiveValue: { [weak self] movies in
-                self?.viewState = .content(list: movies, navigation: nil)
+                self?.viewState = .content(list: movies)
             }).store(in: &cancelables)
     }
 }
