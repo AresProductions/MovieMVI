@@ -1,67 +1,101 @@
-*.podspec
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-/.idea/Project.xml
-/.idea/misc.xml
+
+# Created by https://www.gitignore.io/api/swift
+# Edit at https://www.gitignore.io/?templates=swift
+
+### MacOS Specific ###
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-/app/fabric.properties
-iosApp/Pods/
 
-# built application files
-*.apk
-*.ap_
+# ignore appcode
+.idea
 
-# files for the dex VM
-*.dex
+# Ignore Xcode project folder
+*.xcodeproj
+RIoT.xcodeproj/
 
-# Java class files
-*.class
+### Swift ###
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-# generated files
-bin/
-gen/
-classes/
-gen-external-apklibs/
+## Build generated
+DerivedData/
+
+## Built Artifacts
+artifacts/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+commit-msg.config.json
+
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+# Package.pins
+# Package.resolved
+.build/
+# Add this line if you want to avoid checking in Xcode SPM integration.
+# .swiftpm/xcode
+
+# CocoaPods
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+# Pods/
+# Add this line if you want to avoid checking in source code from the Xcode workspace
+# *.xcworkspace
+
+# Carthage
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+Carthage/Checkouts
+# Carthage/Build
+
+# Accio dependency management
+Dependencies/
+.accio/
+
+# fastlane
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/#source-control
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+# After new code Injection tools there's a generated folder /iOSInjectionProject
+# https://github.com/johnno1962/injectionforxcode
+
+iOSInjectionProject/
+
+# End of https://www.gitignore.io/api/swift
+
+# Custom settings
+
+# build folder created by xcpretty
 build/
-
-# Local configuration file (sdk path, etc)
-local.properties
-project.properties
-release.properties
-
-# Eclipse project files
-.classpath
-.project
-.metadata
-.settings
-
-# Intellij
-.idea/
-*.iml
-
-# Maven
-log/
-target/
-pom.xml.*
-
-# Mac
-*/test-output
-temp-testng-customsuite.xml
-
-# Crashlytics
-crashlytics-build.properties
-com_crashlytics_export_strings.xml
-app/keystore/keystore.config
-logs
-screenshot
-app/.externalNativeBuild
-gradleBuild
